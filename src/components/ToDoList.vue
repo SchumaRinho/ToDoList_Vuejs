@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: 'ToDoList',
   props: {
@@ -53,6 +55,7 @@ export default {
 				}
 			},
 			methods: {
+				...mapActions("todolist", ['load']),
 				remove(id){
 					let i = 0;
 					while(id!=this.todos[i].id){
@@ -85,7 +88,14 @@ export default {
 						console.log(this.todos[todo]);
 					}
 				},
+				mounted() {
+					this.load();
+				},
+			},
+			computed: {
+				...mapGetters("todolist", ["myGetter"])
 			}
+
 }
 </script>
 
