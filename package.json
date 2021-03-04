@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/SchumaRinho/ToDoList_Vuejs#readme",
   "dependencies": {
+    "create-store": "^1.0.0",
     "vue": "^3.0.7"
-  }
+  },
+  "devDependencies": {}
 }
