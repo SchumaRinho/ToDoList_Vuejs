@@ -64,8 +64,7 @@
 					this.todos.splice(i,1)
 				},
 				add(){
-					this.todos.push({id : this.todos.length+1, name : this.newTodo, completed : false});
-					console.log("Nouvelle todo ajouté avec succés : " + this.newTodo);
+					this.todos.push({id : this.newId(), name : this.newTodo, completed : false});
 				},
 				doneSwitch(id){
 					let i = 0;
@@ -76,6 +75,15 @@
 				},
 				affiche(){
 					console.log(this.todos);
+				},
+				newId(){
+					maxId = 1;
+					for (let i = 0; i < this.todos.length; i++) {
+						if(this.todos[i].id > maxId){
+							maxId = this.todos[i].id;
+						}
+					}
+					return maxId + 1;
 				}
 			}
 		}
