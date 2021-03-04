@@ -75,6 +75,9 @@
 				},
 				affiche(){
 					console.log(this.todos);
+					for(let todo in this.todos){
+						console.log(this.todos[todo]);
+					}
 				},
 				newId(){
 					maxId = 1;
