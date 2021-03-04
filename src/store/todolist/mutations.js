@@ -1,3 +1,3 @@
-export function load(state, data) {
-
+export function load(data) {
+    console.log(data);
 }
