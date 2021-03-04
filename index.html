@@ -76,7 +76,10 @@
 				},
 				affiche(){
 					console.log(this.todos);
-				}
+					for(let todo in this.todos){
+						console.log(this.todos[todo]);
+					}
+				},
 			}
 		}
 		Vue.createApp(ToDoApp).mount('#app')
