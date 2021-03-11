@@ -1,3 +1,5 @@
-export function myGetter(state) {
-    return state;
+export function getAllTodos(state) {
+    return function (){
+        return state.todos;
+    }
 }

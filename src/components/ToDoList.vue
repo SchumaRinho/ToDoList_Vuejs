@@ -1,10 +1,10 @@
 <template>
-  Nom : <input v-model="newTodo" placeholder="Nouvelle To Do">
-  <button v-on:click="add">Ajouter</button><br><br>
+  Nom : <input v-model="newTodo" id="newTodo" type="text" placeholder="Nouvelle To Do" >
+  <button v-on:click="add({name: newTodo});" newTodo=''>Ajouter</button><br><br>
 
   <button v-on:click="filterAll">Tout</button><button v-on:click="filterCheck">Check</button><button v-on:click="filterUncheck">Uncheck</button>
   <ul style="list-style-type:none;">
-    <li v-for="todo in todos" :key="todo.id">
+    <li v-for="todo in afficheTodo" :key="todo.id">
       <div v-if="(filter=='all') || ( filter=='check' && todo.completed ) || (filter=='uncheck' && todo.completed==false)">
         <input type="checkbox" v-if="todo.completed" checked v-on:click="doneSwitch(todo.id)">
         <input type="checkbox" v-else v-on:click="doneSwitch(todo.id)">
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 
 export default {
@@ -59,16 +59,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions("todolist", ['load']),
+    ...mapMutations("todolist",['add']),
     remove(id){
       let i = 0;
       while(id!=this.todos[i].id){
         i++;
       }
       this.todos.splice(i,1)
-    },
-    add(){
-      this.todos.push({id : this.newId() + 1, name : this.newTodo, completed : false});
     },
     newId(){
       let maxId = 1;
@@ -102,12 +99,9 @@ export default {
       }
       console.log(this.filter);
     },
-    mounted() {
-			this.load();
-		},
   },
   computed: {
-    ...mapGetters("todolist", ["myGetter"]),
+    ...mapGetters("todolist", ['getAllTodos']),
     aFaire(){
       let nbr = 0;
       for(let todo in this.todos){
@@ -116,6 +110,9 @@ export default {
         }
       }
       return nbr;
+    },
+    afficheTodo(){
+      return this.getAllTodos();
     }
   }
 }
