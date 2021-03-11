@@ -6,18 +6,18 @@
   <ul style="list-style-type:none;">
     <li v-for="todo in afficheTodo" :key="todo.id">
       <div v-if="(filter=='all') || ( filter=='check' && todo.completed ) || (filter=='uncheck' && todo.completed==false)">
-        <input type="checkbox" v-if="todo.completed" checked v-on:click="doneSwitch(todo.id)">
-        <input type="checkbox" v-else v-on:click="doneSwitch(todo.id)">
+        <input type="checkbox" v-if="todo.completed" checked v-on:click="doneSwitch({id: todo.id})">
+        <input type="checkbox" v-else v-on:click="doneSwitch({id: todo.id})">
         {{ todo.name }}
-        <button v-on:click="remove( todo.id )">Supprimer</button>
+        <button v-on:click="remove({id: todo.id})">Supprimer</button>
         <br><br>
       </div>
     </li>
   </ul>
   
-  Il reste {{ aFaire }} tâches à faire. <i v-if="aFaire==0">youpi ☺</i>
+  Il reste {{ remain }} tâches à faire. <i v-if="remain==0">youpi ☺</i>
 
-  <br><br><button v-on:click="affiche">Afficher BdD</button>
+  <br><br><button v-on:click="afficher">Afficher BdD</button>
 </template>
 
 <script>
@@ -31,58 +31,12 @@ export default {
   },
   data() {
     return {
-      todos: [
-        {
-          id: 1,
-          name : 'tache 1',
-          completed : false
-        },{
-          id: 2,
-          name : 'tache 2',
-          completed: true
-        },{
-          id: 3,
-          name : 'tache 3',
-          completed: true
-        },{
-          id: 4,
-          name : 'tache 4',
-          completed: false
-        },{
-          id: 5,
-          name : 'tache 5',
-          completed: false
-        }
-      ],
       newTodo: '',
       filter: 'all',
     }
   },
   methods: {
-    ...mapMutations("todolist",['add']),
-    remove(id){
-      let i = 0;
-      while(id!=this.todos[i].id){
-        i++;
-      }
-      this.todos.splice(i,1)
-    },
-    newId(){
-      let maxId = 1;
-      for(let todo in this.todos){
-        if(maxId < this.todos[todo].id){
-          maxId = this.todos[todo].id;
-        }
-      }
-      return maxId;
-    },
-    doneSwitch(id){
-      let i = 0;
-      while(id!=this.todos[i].id){
-        i++;
-      }
-      this.todos[i].completed = !this.todos[i].completed;
-    },
+    ...mapMutations("todolist",['add','remove','doneSwitch','affiche']),
     filterAll(){
       this.filter='all';
     },
@@ -92,27 +46,17 @@ export default {
     filterUncheck(){
       this.filter='uncheck';
     },
-    affiche(){
-      console.log(this.todos);
-      for(let todo in this.todos){
-        console.log(this.todos[todo]);
-      }
-      console.log(this.filter);
-    },
+    afficher(){
+      this.affiche();
+    }
   },
   computed: {
-    ...mapGetters("todolist", ['getAllTodos']),
-    aFaire(){
-      let nbr = 0;
-      for(let todo in this.todos){
-        if(!this.todos[todo].completed){
-          nbr += 1;
-        }
-      }
-      return nbr;
-    },
+    ...mapGetters("todolist", ['getAllTodos','remaining']),
     afficheTodo(){
       return this.getAllTodos();
+    },
+    remain(){
+      return this.remaining();
     }
   }
 }

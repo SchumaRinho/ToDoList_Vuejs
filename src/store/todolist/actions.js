@@ -1,9 +1,11 @@
-import axios from 'axios';
+/*import axios from 'axios';
 
 export function load({ commit }){
-    axios.get('json/todolist.json')
+    axios.get('js/todolist.js')
             .then(response => {
                 commit("load", response.data);
             })
 
 }
+
+A VOIR !!!*/
