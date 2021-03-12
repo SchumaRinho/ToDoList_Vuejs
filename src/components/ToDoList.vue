@@ -1,6 +1,6 @@
 <template>
   Nom : <input v-model="newTodo" id="newTodo" type="text" placeholder="Nouvelle To Do" >
-  <button v-on:click="add({name: newTodo});" newTodo=''>Ajouter</button><br><br>
+  <button v-on:click="add({name: newTodo});">Ajouter</button><br><br>
 
   <button v-on:click="filterAll">Tout</button><button v-on:click="filterCheck">Check</button><button v-on:click="filterUncheck">Uncheck</button>
   <ul style="list-style-type:none;">
@@ -22,7 +22,6 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
-
 
 export default {
   name: 'ToDoList',
@@ -51,7 +50,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("todolist", ['getAllTodos','remaining']),
+    ...mapGetters("todolist", ['getAllTodos','remaining','getAllList']),
+    getList(){
+      return this.getAllList();
+    },
     afficheTodo(){
       return this.getAllTodos();
     },
