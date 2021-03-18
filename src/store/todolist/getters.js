@@ -1,19 +1,17 @@
 export function getAllTodos(state) {
-    return function (){
-        return state.todoList[0].todos;
+    return function (numList){
+        return state.todoList[numList].todos;
     }
 }
 
 export function getAllList(state){
-    return function (){
         return state.todoList;
-    }
 }
 export function remaining(state) {
-    return function (){
+    return function (numList){
         let nbr = 0;
-        for(let todo in state.todoList[0].todos){
-            if(!state.todoList[0].todos[todo].completed){
+        for(let todo in state.todoList[numList].todos){
+            if(!state.todoList[numList].todos[todo].completed){
             nbr++;
             }
         }

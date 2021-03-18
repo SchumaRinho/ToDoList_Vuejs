@@ -1,15 +1,15 @@
 <template>
   Nom : <input v-model="newTodo" id="newTodo" type="text" placeholder="Nouvelle To Do" >
-  <button v-on:click="add({name: newTodo});" class="add">Ajouter</button><br><br>
+  <button v-on:click="add({name: newTodo,numList: numList});" class="add">Ajouter</button><br><br>
 
   <button v-on:click="filterAll">Tout</button><button v-on:click="filterCheck">Check</button><button v-on:click="filterUncheck">Uncheck</button>
   <ul style="list-style-type:none;">
     <li v-for="todo in afficheTodo" :key="todo.id">
       <div v-if="(filter=='all') || ( filter=='check' && todo.completed ) || (filter=='uncheck' && todo.completed==false)">
-        <input type="checkbox" v-if="todo.completed" checked v-on:click="doneSwitch({id: todo.id})">
-        <input type="checkbox" v-else v-on:click="doneSwitch({id: todo.id})">
+        <input type="checkbox" v-if="todo.completed" checked v-on:click="doneSwitch({id: todo.id,numList: numList})">
+        <input type="checkbox" v-else v-on:click="doneSwitch({id: todo.id,numList: numList})">
         {{ todo.name }}
-        <button v-on:click="remove({id: todo.id})" class="remove">Supprimer</button>
+        <button v-on:click="remove({id: todo.id,numList: numList})" class="remove">Supprimer</button>
         <br><br>
       </div>
     </li>
@@ -26,13 +26,15 @@ import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: 'ToDoList',
-  props: {
-    msg: String
-  },
   data() {
     return {
       newTodo: '',
       filter: 'all',
+    }
+  },
+  props:{
+    numList:{
+      type: Number,
     }
   },
   methods: {
@@ -56,10 +58,10 @@ export default {
       return this.getAllList();
     },
     afficheTodo(){
-      return this.getAllTodos();
+      return this.getAllTodos(this.numList);
     },
     remain(){
-      return this.remaining();
+      return this.remaining(this.numList);
     }
   }
 }

@@ -2,8 +2,8 @@
 <h1>Listes :</h1>
 
   <ul>
-    <li v-for="list in afficheList" :key=list.name>
-      <button>{{list.name}}</button>
+    <li v-for="(list, index) in getAllList" :key=list.name>
+    <button v-on:click.prevent="numList=index" v-on:click="updateNumList">{{list.name}}</button>
     </li>
   </ul>
 
@@ -20,23 +20,21 @@ import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: 'sidebar',
-  props: {
-    msg: String
-  },
+  emits: ["nextNumList"],
   data() {
     return {
+      numList: 0,
       newList: '',
     }
   },
   methods: {
     ...mapMutations("todolist", ['addList']),
-
+    updateNumList(){
+      this.$emit("nextNumList",this.numList);
+   }
   },
   computed: {
     ...mapGetters("todolist", ["getAllList"]),
-    afficheList(){
-      return this.getAllList();
-    },
   }
 }
 </script>

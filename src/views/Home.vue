@@ -1,10 +1,10 @@
 <template>
 <div id="App">
   <div id="sidebar">
-    <sidebar/>
+    <sidebar  @nextNumList="updateNumList"/>
   </div>
   <div id="toDoList">
-    <ToDoList />
+    <ToDoList :numList="this.newNumList"/>
   </div>
 </div>
 </template>
@@ -14,9 +14,19 @@ import ToDoList from '../components/ToDoList.vue'
 import sidebar from '../components/sidebar.vue';
 export default {
   name: 'App',
+  data() {
+    return {
+      newNumList: 0,
+    }
+  },
   components: {
     ToDoList,
     sidebar
+  },
+  methods:{
+    updateNumList(newNumList){
+      this.newNumList = newNumList;
+    }
   }
 }
 </script>
