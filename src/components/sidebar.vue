@@ -10,7 +10,7 @@
 <h4>Créer Liste :</h4>
 
   Nom : <input v-model="newList" id="newList" type="text" placeholder="Nom"><br><br>
-<button v-on:click="addList({name: newList});">Créer la liste</button><br><br>
+<button v-on:click="addList({name: newList});" class="add">Créer la liste</button><br><br>
 
 </template>
 

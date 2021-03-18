@@ -1,6 +1,6 @@
 <template>
   Nom : <input v-model="newTodo" id="newTodo" type="text" placeholder="Nouvelle To Do" >
-  <button v-on:click="add({name: newTodo});">Ajouter</button><br><br>
+  <button v-on:click="add({name: newTodo});" class="add">Ajouter</button><br><br>
 
   <button v-on:click="filterAll">Tout</button><button v-on:click="filterCheck">Check</button><button v-on:click="filterUncheck">Uncheck</button>
   <ul style="list-style-type:none;">
@@ -9,7 +9,7 @@
         <input type="checkbox" v-if="todo.completed" checked v-on:click="doneSwitch({id: todo.id})">
         <input type="checkbox" v-else v-on:click="doneSwitch({id: todo.id})">
         {{ todo.name }}
-        <button v-on:click="remove({id: todo.id})">Supprimer</button>
+        <button v-on:click="remove({id: todo.id})" class="remove">Supprimer</button>
         <br><br>
       </div>
     </li>
