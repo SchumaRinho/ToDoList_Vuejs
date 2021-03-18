@@ -1,27 +1,30 @@
 <template>
-<div id="sidebar">
-  <sidebar/>
-</div>
-<div id="toDoList">
-  <ToDoList />
-</div>
+  <div id="nav">
+    <router-link to="/">Accueil</router-link> |
+    <router-link to="/login">Connexion</router-link>
+  </div>
+  <router-view/>
 </template>
 
-<script>
-import ToDoList from './components/ToDoList.vue'
-import sidebar from './components/sidebar.vue';
-
-export default {
-  name: 'App',
-  components: {
-    ToDoList,
-    sidebar
-  }
-}
-</script>
-
 <style>
-#app {
+
+
+#nav {
+  font-size: 30px;
+  padding: 30px;
+  text-align: center;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+#App {
   display:grid;
   grid-template-columns: 25% 75%;
   padding-left: 15px;

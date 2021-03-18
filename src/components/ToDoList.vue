@@ -16,8 +16,9 @@
   </ul>
   
   Il reste {{ remain }} tâches à faire. <i v-if="remain==0">youpi ☺</i>
-
+<!--
   <br><br><button v-on:click="afficher">Afficher BdD</button>
+-->
 </template>
 
 <script>
