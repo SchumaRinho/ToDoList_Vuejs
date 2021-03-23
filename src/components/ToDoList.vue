@@ -62,9 +62,6 @@ export default {
     filterUncheck(){
       this.filter='uncheck';
     },
-    afficher(){
-      this.affiche();
-    }
   },
   computed: {
     ...mapGetters("todolist", ['getAllTodos','remaining','getAllList']),

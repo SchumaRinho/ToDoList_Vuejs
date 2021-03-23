@@ -5,7 +5,6 @@ export function add(state,{name,numList}) {
         name: name,
         completed: false
     });
-    console.log(state.todoList[numList].todos);
 }
 
 export function remove(state,{id,numList}) {
@@ -13,7 +12,6 @@ export function remove(state,{id,numList}) {
     for(id;id<=state.todoList[numList].todos.length;id++){
         state.todoList[numList].todos[id-1].id--;
     }
-    console.log(state.todoList[numList].todos);
 }
 
 export function modify(state,{id,numList,name}) {
@@ -21,16 +19,7 @@ export function modify(state,{id,numList,name}) {
 }
 
 export function doneSwitch(state,{id,numList}) {
-    console.log(numList);
     state.todoList[numList].todos[id-1].completed = !state.todoList[numList].todos[id-1].completed;
-    console.log(state.todoList[numList].todos);
-}
-
-export function affiche(state,{numList}) {
-    console.log(state.todoList[numList].todos);
-    for(let todo in state.todoList[numList].todos){
-      console.log(state.todoList[numList].todos[todo]);
-    }
 }
 
 export function addList(state,{name}){
@@ -38,7 +27,6 @@ export function addList(state,{name}){
         name: name,
         todos:[]
     });
-    console.log(state.todoList);
 }
 
 /*export function filter(state,{filter}){
