@@ -16,6 +16,10 @@ export function remove(state,{id,numList}) {
     console.log(state.todoList[numList].todos);
 }
 
+export function modify(state,{id,numList,name}) {
+    state.todoList[numList].todos[id-1].name = name;
+}
+
 export function doneSwitch(state,{id,numList}) {
     console.log(numList);
     state.todoList[numList].todos[id-1].completed = !state.todoList[numList].todos[id-1].completed;

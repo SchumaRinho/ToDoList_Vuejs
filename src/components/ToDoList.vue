@@ -9,6 +9,11 @@
         <input type="checkbox" v-if="todo.completed" checked v-on:click="doneSwitch({id: todo.id,numList: numList})">
         <input type="checkbox" v-else v-on:click="doneSwitch({id: todo.id,numList: numList})">
         {{ todo.name }}
+        <div v-if="modifying==todo.id">
+          <input  v-model="newName" id="newName" type="text" placeholder="Nouveau nom" >
+          <button v-on:click="modify({id: todo.id,numList: numList, name: newName}); toModify(todo.id)" class="add">Submit</button>
+        </div>
+        <button v-on:click="toModify(todo.id)">Modifier</button>
         <button v-on:click="remove({id: todo.id,numList: numList})" class="remove">Supprimer</button>
         <br><br>
       </div>
@@ -30,6 +35,8 @@ export default {
     return {
       newTodo: '',
       filter: 'all',
+      modifying : null,
+      newName : '',
     }
   },
   props:{
@@ -38,7 +45,14 @@ export default {
     }
   },
   methods: {
-    ...mapMutations("todolist",['add','remove','doneSwitch','affiche']),
+    ...mapMutations("todolist",['add','remove','modify','doneSwitch','affiche']),
+    toModify(id){
+      if(this.modifying!=id){
+        this.modifying = id;
+      }else{
+        this.modifying = null;
+      }
+    },
     filterAll(){
       this.filter='all';
     },
