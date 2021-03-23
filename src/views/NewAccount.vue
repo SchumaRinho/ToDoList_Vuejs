@@ -1,25 +1,30 @@
 <template>
-  <div class="login">
+  <h3>Création d'un compte</h3>
+  <div class="newAccount">
+    <h5>Pseudonyme : </h5>
       <input placeholder="Pseudonyme" required >
+    <h5>Adresse e-mail : </h5>
+      <input placeholder="E-mail" required >
+    <h5>Mots de passe : </h5>
       <input type="password" placeholder="Mots de passe" minlength="6" required><br><br>
-      <button>Connexion</button>
-      <div id="newAccount">
-        Nouveau ? <router-link to="/newAccount">Créer un compte ! </router-link>
-      </div>
+      <button>Créer compte</button>
   </div>
 </template>
 
 <style scoped>
 
-.login{
-  margin: 15% 0;
+div{
+  margin: 5% 0 0;
 }
 
-#newAccount,#newAccount *{
+h3{
+  margin: 10% 0 0;
   text-align: center;
-  margin: 5% 0;
-  font-size: 15px;
-  font-weight: bold;
+}
+
+h5{
+  width: 20%;
+  margin: 1% 0 0 40%;
 }
 
 input {
@@ -46,4 +51,5 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
 </style>
